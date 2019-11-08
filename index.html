@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="./src/index.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="./src/index.css" />
 	<title>Multiplication Table</title>
 </head>
-<body>
+<body style="user-select:none">
+	<main class="content-wrapper">
+		<section class="table-wrapper">
+			<div class="title">
+				<h1>Multiplication Table</h1>
+				<p><i>Use the slider to increase the table's scope</i></p>
+			</div>
+			<table></table>
+		</section>
+		<aside class="options-wrapper">
+			<div class="options-container">
+				<input type="range" id="size-option" min="10" max="16" value="10" />
+			</div>
+		</aside>
+	</main>
 	<script src="./src/index.js"></script>
 </body>
 </html>
