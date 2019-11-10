@@ -3,17 +3,16 @@ function MultiplicationTable() {
 }
 
 MultiplicationTable.prototype.createTable = function () {
-    const table = document.querySelector("table")
+    this.element = document.querySelector("table")
     this.size = parseInt(document.querySelector("#size-option").value)
-    table.innerHTML = ""
+    this.divisorModifier = parseInt(document.querySelector("#div-option").value)
+    this.element.innerHTML = ""
 
     for (let rowIndex = 0; rowIndex <= this.size + 1; rowIndex++) {
         let row = document.createElement("tr")
 
         for (let colIndex = 0; colIndex <= this.size + 1; colIndex++) {
-            let cell = rowIndex === 0 || colIndex === 0 ?
-                document.createElement("th") :
-                document.createElement("td"),
+            let cell = [rowIndex, colIndex].indexOf(0) !== -1 ? document.createElement("th") : document.createElement("td"),
                 tooltip = document.createElement("span")
             tooltip.classList.add("tooltip")
 
@@ -24,19 +23,41 @@ MultiplicationTable.prototype.createTable = function () {
                 else cell.textContent = rowIndex - 1
 
             if (cell.tagName === "TD") {
+                let product = (rowIndex - 1) * (colIndex - 1)
                 if (rowIndex === colIndex) cell.classList.add("square")
-                cell.textContent = (rowIndex - 1) * (colIndex - 1)
+                if (product % this.divisorModifier === 0) cell.classList.toggle("divisorModifier")
+                cell.textContent = product
                 tooltip.textContent = String(rowIndex - 1) + " " + String.fromCharCode(215) + " " + String(colIndex - 1)
                 cell.appendChild(tooltip)
             }
             row.appendChild(cell)
         }
-        table.appendChild(row)
+        this.element.appendChild(row)
     }
 }
 
-new MultiplicationTable()
-
-document.querySelector("#size-option").addEventListener("change", function () {
+window.onload = () => {
     new MultiplicationTable()
-})
+    for (let [index, inputSlider] of Array.from(document.querySelectorAll("input[type=range]")).entries()) {
+        let tooltip = document.createElement("span")
+        tooltip.classList.add("tooltip")
+        if (index === 0) tooltip.textContent = "10"
+        else tooltip.textContent = "1"
+        inputSlider.insertAdjacentElement("afterend", tooltip)
+    }
+}
+
+document.querySelector("#size-option").onchange = () => new MultiplicationTable()
+
+document.querySelector("#size-option").oninput = function () {
+    this.nextSibling.textContent = this.value
+    const computedProgress = (parseInt(this.value) - 10) * 15.5 + 5
+    this.style.cssText = "background:linear-gradient(90deg, #00000060 " + computedProgress + "%, #00000000 " + computedProgress + "%);"
+}
+
+document.querySelector("#div-option").oninput = function () {
+    this.nextSibling.textContent = this.value
+    const computedProgress = parseInt(this.value) * 4.75
+    this.style.cssText = "background:linear-gradient(90deg, #00000060 " + computedProgress + "%, #00000000 " + computedProgress + "%);"
+    new MultiplicationTable()
+}

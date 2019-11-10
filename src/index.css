@@ -59,7 +59,7 @@ main {
 
 .title {
     color: #2c2c2c;
-    height: 48px;
+    height: 64px;
     padding-bottom: 16px;
 }
 
@@ -76,7 +76,16 @@ main {
     pointer-events: none;
 }
 
-td:hover .tooltip {
+.options-container .tooltip {
+    position: absolute;
+    transform: translateX(-330px);
+}
+
+.options-container .tooltip:nth-child(4) {
+    transform: translate(-330px, -18px);
+}
+
+td:hover .tooltip, input[type=range]:hover+.tooltip {
     visibility: visible;
 }
 
@@ -84,24 +93,28 @@ td:hover .tooltip {
     background: #86868690;
 }
 
+.divisorModifier {
+    background: #ffffff90;
+}
+
 .options-wrapper {
     display: flex;
     align-items: center;
     margin-left: 20px;
     padding-top: 64px;
-    width: 0;
+    width: 36px;
 }
 
 input[type=range] {
     -webkit-appearance: none;
     transform: rotate(90deg) translateX(-175px);
-    transform-origin: top left;
+    transform-origin: bottom left;
     height: 5px;
     width: 350px;
-    background: none;
+    background: linear-gradient(90deg, #00000060 5%, #00000000 5%);
     border: #2c2c2ca0 solid 2.5px;
     border-radius: 10px;
-    padding-right: 6.67px;
+    padding: 0 6.67px 0 3.33px;
 }
 
 input[type=range]:focus {
@@ -120,5 +133,9 @@ input[type=range]::-webkit-slider-thumb {
 input[type=range]::-webkit-slider-thumb:hover {
     height: 15px;
     width: 15px;
-    transform: translateX(-1px);
+    transform: translateX(-1.5px);
+}
+
+#div-option {
+    transform: rotate(90deg) translate(-192.5px, -20px);
 }
