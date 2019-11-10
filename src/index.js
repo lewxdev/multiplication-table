@@ -41,8 +41,7 @@ window.onload = () => {
     for (let [index, inputSlider] of Array.from(document.querySelectorAll("input[type=range]")).entries()) {
         let tooltip = document.createElement("span")
         tooltip.classList.add("tooltip")
-        if (index === 0) tooltip.textContent = "10"
-        else tooltip.textContent = "1"
+        tooltip.textContent = "10"
         inputSlider.insertAdjacentElement("afterend", tooltip)
     }
 }
