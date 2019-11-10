@@ -46,7 +46,22 @@ window.onload = () => {
     }
 }
 
-document.querySelector("#size-option").onchange = () => new MultiplicationTable()
+window.onresize = () => {
+    const contentWidth = document.querySelector(".content-wrapper").offsetWidth,
+        modalOverlay = document.querySelector(".modal-overlay")
+    if (contentWidth > this.innerWidth) {
+        modalOverlay.style.visibility = "visible"
+        modalOverlay.style.height = document.body.clientHeight + "px"
+    } else {
+        modalOverlay.style.visibility = "hidden"
+        modalOverlay.style.height = document.body.clientHeight + "px"
+    }
+}
+
+document.querySelector("#size-option").onchange = () => {
+    new MultiplicationTable()
+    window.onresize()
+}
 
 document.querySelector("#size-option").oninput = function () {
     this.nextSibling.textContent = this.value
