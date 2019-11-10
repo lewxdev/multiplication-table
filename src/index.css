@@ -139,6 +139,10 @@ input[type=range]:focus {
     outline: none;
 }
 
+input[type=range]:hover {
+    cursor: pointer;
+}
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: linear-gradient(45deg, #f2fcfe 50%, hsl(190, 50%, 70%) 50%);
